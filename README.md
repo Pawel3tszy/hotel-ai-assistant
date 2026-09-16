@@ -1,20 +1,24 @@
 # Hotel AI Assistant
 
-Prototyp tekstowego asystenta AI dla hotelu, wykorzystującego architekturę RAG.
+Prototyp tekstowego asystenta AI dla hotelu, pełniącego rolę wirtualnego konsjerża.
 
 ## Opis projektu
 
-Aplikacja pełni rolę wirtualnego hotelowego konsjerża. Odpowiada na pytania gości na podstawie przygotowanej bazy wiedzy hotelu, pamięta kontekst rozmowy oraz obsługuje wybrane scenariusze hotelowe.
+Aplikacja umożliwia gościowi prowadzenie rozmowy z asystentem hotelowym, zadawanie pytań dotyczących obiektu oraz korzystanie z wybranych usług hotelowych.
 
-Projekt wykorzystuje architekturę RAG, dzięki czemu odpowiedzi są generowane na podstawie danych zapisanych w bazie wiedzy hotelu.
+System rozpoznaje, czy wiadomość użytkownika dotyczy jednej z obsługiwanych akcji, takich jak room service, zamówienie ręczników, ustawienie budzenia czy rezerwacja stolika lub masażu.
+
+W przypadku pytań informacyjnych aplikacja wyszukuje odpowiednie dane w bazie wiedzy hotelu, a następnie przekazuje je wraz z kontekstem rozmowy do modelu językowego, który generuje odpowiedź.
+
+Projekt ma modułową strukturę i umożliwia zmianę konfiguracji oraz bazy wiedzy dla różnych hoteli.
 
 ## Funkcje
 
 - odpowiadanie na pytania dotyczące hotelu,
-- wyszukiwanie semantyczne w bazie wiedzy,
+- wyszukiwanie informacji w bazie wiedzy,
 - pamięć kontekstu rozmowy,
-- proaktywne pytania i sugestie,
 - rozpoznawanie intencji użytkownika,
+- proaktywne pytania i sugestie,
 - obsługa wybranych scenariuszy:
   - room service,
   - dodatkowe ręczniki,
@@ -32,14 +36,6 @@ Projekt wykorzystuje architekturę RAG, dzięki czemu odpowiedzi są generowane 
 - Sentence Transformers
 - NumPy
 - Streamlit
-
-## Jak działa RAG
-
-Dokumenty zawierające informacje o hotelu są wczytywane przez aplikację i dzielone na mniejsze fragmenty.
-
-Każdy fragment jest zamieniany na embedding. Pytanie użytkownika również jest zamieniane na embedding, a następnie system wyszukuje najbardziej podobne fragmenty bazy wiedzy.
-
-Wybrane informacje są przekazywane do modelu językowego jako kontekst do wygenerowania odpowiedzi.
 
 ## Struktura projektu
 
@@ -66,19 +62,15 @@ hotel-ai-assistant/
 
 ## Uruchomienie
 
-### 1. Instalacja zależności
-
-Po pobraniu projektu zainstaluj wymagane biblioteki:
+1. Zainstaluj wymagane biblioteki:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Konfiguracja klucza OpenAI API
+2. Ustaw klucz OpenAI API.
 
-Aplikacja wymaga klucza OpenAI API.
-
-W systemie Windows można ustawić go w PowerShellu:
+W systemie Windows:
 
 ```powershell
 setx OPENAI_API_KEY "TWÓJ_KLUCZ_API"
@@ -86,17 +78,13 @@ setx OPENAI_API_KEY "TWÓJ_KLUCZ_API"
 
 Po ustawieniu zmiennej należy ponownie uruchomić terminal lub środowisko programistyczne.
 
-### 3. Uruchomienie aplikacji webowej
+3. Uruchom wersję webową:
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-Aplikacja zostanie uruchomiona w przeglądarce.
-
-### 4. Uruchomienie wersji terminalowej
-
-Alternatywnie można uruchomić aplikację bez interfejsu webowego:
+4. Alternatywnie można uruchomić wersję terminalową:
 
 ```bash
 python main.py
